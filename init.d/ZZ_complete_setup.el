@@ -59,7 +59,10 @@
 ;; smartparens (https://github.com/Fuco1/smartparens)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'smartparens-config)
+(require 'smartparens-ruby)
 (show-smartparens-global-mode +1)
+(smartparens-global-mode +1)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; magit (https://github.com/magit/magit)
@@ -81,6 +84,9 @@
 (add-to-list 'auto-mode-alist '("\\.gemspec$" . enh-ruby-mode))
 
 (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+
+(setq ruby-deep-indent-paren nil)
+(setq enh-ruby-deep-indent-paren nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ido Settings (Command Completion)
@@ -137,6 +143,8 @@
  '(tool-bar-mode nil)
  '(visual-bell t))
 
+(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+(global-fci-mode 1)
 (setq fill-column 80)
 
 ;; Autosave and backup

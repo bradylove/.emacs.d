@@ -61,24 +61,17 @@
 
     ;; Language specific packages
     enh-ruby-mode
+    feature-mode
+    go-mode
     haml-mode
+    inf-ruby
     js2-mode
     org
-    ruby-end
-
-    ;; coffee-mode
-    ;; feature-mode
-    ;; go-mode
-    ;; go-autocomplete
-    ;; inf-ruby
-    ;; markdown-mode
-    ;; multi-web-mode
-    ;; rinari
-    ;; rspec-mode
-    ;; ruby-end
-    ;; ruby-tools
-    ;; yaml-mode
-    ;; ruby-mode
+    ruby-tools
+    slim-mode
+    yaml-mode
+    markdown-mode
+    rinari
     )
 
   "A list of packages to ensure are installed at launch")

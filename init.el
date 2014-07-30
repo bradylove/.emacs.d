@@ -16,3 +16,4 @@
 ;; Set up 'custom' system
 (setq custom-file (expand-file-name "customizations.el" bkl-emacs-config-dir))
 (load custom-file)
+(put 'narrow-to-region 'disabled nil)

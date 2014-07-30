@@ -5,3 +5,4 @@ ido.hist
 projectile-bookmarks.eld
 \#*.*\#
 *.el~
+session.*
