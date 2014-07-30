@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: binding.remote_pry
+# key: bpr
+# binding: direct-keybinding
+# --
+binding.remote_pry
