@@ -84,6 +84,7 @@
 (add-to-list 'auto-mode-alist '("\\.gemspec$" . enh-ruby-mode))
 
 (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+(add-hook 'enh-ruby-mode-hook 'ruby-tools-mode)
 
 (setq ruby-deep-indent-paren nil)
 (setq enh-ruby-deep-indent-paren nil)
