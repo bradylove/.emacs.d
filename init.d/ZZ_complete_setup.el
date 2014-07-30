@@ -68,6 +68,8 @@
 (require 'smartparens-ruby)
 (show-smartparens-global-mode +1)
 (smartparens-global-mode +1)
+(setq sp-autoescape-string-quote nil)
+(setq sp-autoescape-string-quote-if-empty nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; magit (https://github.com/magit/magit)

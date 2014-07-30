@@ -19,19 +19,8 @@
     dash
     s
 
-    ;; Misc Tools
-    ;; ag
-    ;; auto-complete
-    ;; autopair
-    ;; fill-column-indicator
-    ;; grizzl
-    ;; ido-ubiquitous
-    ;; magit
-    ;; projectile
-    ;; rainbow-mode
-    ;; smartparens
-
     ;; Utils
+    ag
     anzu
     browse-kill-ring
     discover-my-major
@@ -44,7 +33,6 @@
     rainbow-mode
     smartparens
     volatile-highlights
-    ;; autopair
     fill-column-indicator
     flx-ido
     smex
