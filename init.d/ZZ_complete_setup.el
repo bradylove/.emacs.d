@@ -18,7 +18,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (diminish 'anzu-mode)
 (diminish 'guru-mode)
-(diminish 'company-mode)
 (diminish 'projectile-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -46,14 +45,38 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; company-mode (http://company-mode.github.io/)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq company-idle-delay 0.5)
-(setq company-tooltip-limit 10)
-(setq company-minimum-prefix-length 2)
+;; (setq company-idle-delay 0.5)
+;; (setq company-tooltip-limit 10)
+;; (setq company-minimum-prefix-length 2)
 ;; invert the navigation direction if the the completion popup-isearch-match
 ;; is displayed on top (happens near the bottom of windows)
-(setq company-tooltip-flip-when-above t)
+;; (setq company-tooltip-flip-when-above t)
 
-(global-company-mode 1)
+;; (global-company-mode 1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; auto-complete
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'auto-complete-config)
+(ac-config-default)
+
+(setq ac-auto-start t)
+(setq ac-auto-show-menu 0.0)
+(ac-set-trigger-key "TAB")
+(define-key ac-menu-map "\C-n" 'ac-next)
+(define-key ac-menu-map "\C-p" 'ac-previous)
+
+
+(add-to-list 'ac-modes 'enh-ruby-mode)
+(add-to-list 'ac-modes 'js2-mode)
+(add-to-list 'ac-modes 'css-mode)
+
+(global-auto-complete-mode +1)
+
+;; (require 'go-autocomplete)
+;; (add-hook 'go-mode-hook
+;;           (lambda ()
+;;            (add-to-list 'ac-source ac-go-candidates)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; projectile (https://github.com/bbatsov/projectile)

@@ -42,10 +42,12 @@
     yasnippet
 
     ;; Auto-completion
-    company
+    ;; company
+    auto-complete
 
     ;; Themes
     moe-theme
+    ;; tangotango-theme
 
     ;; Language specific packages
     enh-ruby-mode
