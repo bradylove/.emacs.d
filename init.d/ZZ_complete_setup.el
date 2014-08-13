@@ -82,17 +82,23 @@
 ;; projectile (https://github.com/bbatsov/projectile)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (projectile-global-mode)
+(setq projectile-enable-caching t)
 (setq projectile-completion-system 'grizzl)
+;; Press Command-p for fuzzy find in project
+(global-set-key (kbd "s-p") 'projectile-find-file)
+;; Press Command-b for fuzzy switch buffer
+(global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smartparens (https://github.com/Fuco1/smartparens)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'smartparens-config)
 (require 'smartparens-ruby)
-(show-smartparens-global-mode +1)
-(smartparens-global-mode +1)
-(setq sp-autoescape-string-quote nil)
-(setq sp-autoescape-string-quote-if-empty nil)
+(smartparens-global-mode)
+(show-smartparens-global-mode t)
+(sp-with-modes '(rhtml-mode)
+  (sp-local-pair "<" ">")
+  (sp-local-pair "<%" "%>"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; magit (https://github.com/magit/magit)
@@ -199,8 +205,9 @@
 (setq mouse-sel-retain-highlight  t) ;; Keep mouse highlighting
 
 (custom-set-faces
- '(default ((t (:family "Source Code Pro" :slant normal :weight regular :height 110))))
- '(variable-pitch ((t (:family "Source Code Pro" :slant normal :weight regular :height 110)))))
+ '(default ((t (:family "Input Mono" :slant normal :weight regular :height 100))))
+ '(variable-pitch ((t (:family "Input Mono" :slant normal :weight regular :height 100)))))
+
 
 (moe-dark)
 

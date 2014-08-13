@@ -37,6 +37,7 @@
     flx-ido
     smex
     ido-ubiquitous
+    textmate
 
     ;; Snippets
     yasnippet
