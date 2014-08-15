@@ -31,13 +31,14 @@
     projectile
     magit
     rainbow-mode
-    smartparens
+    ;; smartparens
     volatile-highlights
     fill-column-indicator
     flx-ido
     smex
     ido-ubiquitous
     textmate
+    autopair
 
     ;; Snippets
     yasnippet
@@ -51,7 +52,8 @@
     ;; tangotango-theme
 
     ;; Language specific packages
-    enh-ruby-mode
+    ;; enh-ruby-mode
+    ruby-end
     feature-mode
     go-mode
     haml-mode

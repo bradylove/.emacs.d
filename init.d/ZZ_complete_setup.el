@@ -43,18 +43,6 @@
 (setq-default js2-basic-offset 2)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; company-mode (http://company-mode.github.io/)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (setq company-idle-delay 0.5)
-;; (setq company-tooltip-limit 10)
-;; (setq company-minimum-prefix-length 2)
-;; invert the navigation direction if the the completion popup-isearch-match
-;; is displayed on top (happens near the bottom of windows)
-;; (setq company-tooltip-flip-when-above t)
-
-;; (global-company-mode 1)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'auto-complete-config)
@@ -82,23 +70,26 @@
 ;; projectile (https://github.com/bbatsov/projectile)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (projectile-global-mode)
-(setq projectile-enable-caching t)
 (setq projectile-completion-system 'grizzl)
-;; Press Command-p for fuzzy find in project
+
 (global-set-key (kbd "s-p") 'projectile-find-file)
-;; Press Command-b for fuzzy switch buffer
 (global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smartparens (https://github.com/Fuco1/smartparens)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'smartparens-config)
-(require 'smartparens-ruby)
-(smartparens-global-mode)
-(show-smartparens-global-mode t)
-(sp-with-modes '(rhtml-mode)
-  (sp-local-pair "<" ">")
-  (sp-local-pair "<%" "%>"))
+;; (require 'smartparens-config)
+;; (require 'smartparens-ruby)
+;; (smartparens-global-mode)
+;; (show-smartparens-global-mode t)
+;; (sp-with-modes '(rhtml-mode)
+;;   (sp-local-pair "<" ">")
+;;   (sp-local-pair "<%" "%>"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; autopair
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(autopair-global-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; magit (https://github.com/magit/magit)
@@ -109,21 +100,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; enh-ruby-mode (https://github.com/zenspider/enhanced-ruby-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
+;; (autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
 
-(add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.rake$" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile$" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.ru$" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("Gemfile$" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("Guardfile$" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.gemspec$" . enh-ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Guardfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
 
-(add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
-(add-hook 'enh-ruby-mode-hook 'ruby-tools-mode)
+(add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
+(add-hook 'ruby-mode-hook 'ruby-tools-mode)
 
 (setq ruby-deep-indent-paren nil)
-(setq enh-ruby-deep-indent-paren nil)
+;; (setq enh-ruby-deep-indent-paren nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ido Settings (Command Completion)
@@ -192,6 +183,8 @@
 (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
 (global-fci-mode 1)
 (setq fill-column 80)
+(custom-set-variables '(fill-column 80))
+
 
 ;; Autosave and backup
 (setq make-backup-files nil
@@ -205,9 +198,8 @@
 (setq mouse-sel-retain-highlight  t) ;; Keep mouse highlighting
 
 (custom-set-faces
- '(default ((t (:family "Input Mono" :slant normal :weight regular :height 100))))
- '(variable-pitch ((t (:family "Input Mono" :slant normal :weight regular :height 100)))))
-
+ '(default ((t (:family "Input Mono" :slant normal :weight light :height 110))))
+ '(variable-pitch ((t (:family "Input Mono" :slant normal :weight light :height 110)))))
 
 (moe-dark)
 
