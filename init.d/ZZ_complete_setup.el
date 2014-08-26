@@ -4,11 +4,6 @@
 (global-anzu-mode +1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; autopair (https://github.com/capitaomorte/autopair)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (autopair-global-mode t)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; discover-my-major (https://github.com/steckerhalter/discover-my-major)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (global-set-key (kbd "C-h C-m") 'discover-my-major)
@@ -17,18 +12,8 @@
 ;; diminish (http://whattheemacsd.com/init.el-04.html)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (diminish 'anzu-mode)
-(diminish 'guru-mode)
 (diminish 'projectile-mode)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; guru-mode (https://github.com/bbatsov/guru-mode)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(guru-global-mode +1)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; guru-mode (https://github.com/bbatsov/guru-mode)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(guru-global-mode +1)
+(diminish 'auto-complete-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; volatile-highlights (http://www.emacswiki.org/emacs/VolatileHighlights)
@@ -54,17 +39,11 @@
 (define-key ac-menu-map "\C-n" 'ac-next)
 (define-key ac-menu-map "\C-p" 'ac-previous)
 
-
-(add-to-list 'ac-modes 'enh-ruby-mode)
+(add-to-list 'ac-modes 'ruby-mode)
 (add-to-list 'ac-modes 'js2-mode)
 (add-to-list 'ac-modes 'css-mode)
 
 (global-auto-complete-mode +1)
-
-;; (require 'go-autocomplete)
-;; (add-hook 'go-mode-hook
-;;           (lambda ()
-;;            (add-to-list 'ac-source ac-go-candidates)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; projectile (https://github.com/bbatsov/projectile)
@@ -76,6 +55,11 @@
 (global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; autopair
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(autopair-global-mode +1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smartparens (https://github.com/Fuco1/smartparens)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (require 'smartparens-config)
@@ -85,11 +69,8 @@
 ;; (sp-with-modes '(rhtml-mode)
 ;;   (sp-local-pair "<" ">")
 ;;   (sp-local-pair "<%" "%>"))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; autopair
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(autopair-global-mode)
+;; (setq sp-autoescape-string-quote nil)
+;; (setq sp-autoescape-string-quote-if-empty nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; magit (https://github.com/magit/magit)
@@ -157,7 +138,7 @@
  '(show-trailing-whitespace t))
 
 (add-hook 'before-save-hook (lambda () (whitespace-cleanup)))
-(setq next-line-add-newlines t) ; Add newline when at buffer end
+(setq next-line-add-newlines 'nil) ; Add newline when at buffer end
 (setq require-final-newline 't) ; Always newline at end of file
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -185,7 +166,6 @@
 (setq fill-column 80)
 (custom-set-variables '(fill-column 80))
 
-
 ;; Autosave and backup
 (setq make-backup-files nil
       auto-save-list-file-name nil
@@ -198,10 +178,8 @@
 (setq mouse-sel-retain-highlight  t) ;; Keep mouse highlighting
 
 (custom-set-faces
- '(default ((t (:family "Input Mono" :slant normal :weight light :height 110))))
- '(variable-pitch ((t (:family "Input Mono" :slant normal :weight light :height 110)))))
-
-(moe-dark)
+ '(default ((t (:family "Hermit" :slant normal :weight light :height 110))))
+ '(variable-pitch ((t (:family "Hermit" :slant normal :weight light :height 110)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Key Bindings

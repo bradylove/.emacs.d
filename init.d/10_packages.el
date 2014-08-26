@@ -26,7 +26,6 @@
     discover-my-major
     diminish
     grizzl
-    guru-mode
     ov
     projectile
     magit
@@ -37,24 +36,21 @@
     flx-ido
     smex
     ido-ubiquitous
-    textmate
     autopair
 
     ;; Snippets
     yasnippet
 
     ;; Auto-completion
-    ;; company
     auto-complete
 
     ;; Themes
-    moe-theme
-    ;; tangotango-theme
+    flatui-theme
 
     ;; Language specific packages
-    ;; enh-ruby-mode
-    ruby-end
+    enh-ruby-mode
     feature-mode
+    ruby-end
     go-mode
     haml-mode
     inf-ruby
@@ -64,9 +60,7 @@
     slim-mode
     yaml-mode
     markdown-mode
-    rinari
-    )
-
+    rinari)
   "A list of packages to ensure are installed at launch")
 
 (dolist (p my-packages)
