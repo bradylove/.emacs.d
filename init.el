@@ -17,3 +17,6 @@
 (setq custom-file (expand-file-name "customizations.el" bkl-emacs-config-dir))
 (load custom-file)
 (put 'narrow-to-region 'disabled nil)
+
+(if (file-exists-p "~/.emacs_local.el")
+    (load "~/.emacs_local.el"))

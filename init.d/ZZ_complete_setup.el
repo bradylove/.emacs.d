@@ -14,6 +14,9 @@
 (diminish 'anzu-mode)
 (diminish 'projectile-mode)
 (diminish 'auto-complete-mode)
+(diminish 'autopair-mode)
+(diminish 'yas-minor-mode)
+(diminish 'ruby-end-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; volatile-highlights (http://www.emacswiki.org/emacs/VolatileHighlights)
@@ -64,6 +67,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (if (string-equal system-type "darwin")
     (setq magit-emacsclient-executable "/usr/local/bin/emacsclient"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; smart-mode-line (magit (https://github.com/magit/magit)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq sml/no-confirm-load-theme t)
+(sml/setup)
+(sml/apply-theme 'respectful)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ruby-mode
