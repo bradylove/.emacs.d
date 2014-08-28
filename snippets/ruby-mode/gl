@@ -1,0 +1,11 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: gearman super log
+# key: gl
+# binding: direct-keybinding
+# --
+Gearman::Util.logger.info("*" * 80)
+Gearman::Util.logger.info("* ")
+Gearman::Util.logger.info("* $1")
+Gearman::Util.logger.info("* $2")
+Gearman::Util.logger.info("* ")
+Gearman::Util.logger.info("*" * 80)

@@ -30,7 +30,6 @@
     projectile
     magit
     rainbow-mode
-    ;; smartparens
     volatile-highlights
     fill-column-indicator
     flx-ido
@@ -48,7 +47,6 @@
     flatui-theme
 
     ;; Language specific packages
-    enh-ruby-mode
     feature-mode
     ruby-end
     go-mode

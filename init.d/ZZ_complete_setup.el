@@ -39,7 +39,7 @@
 (define-key ac-menu-map "\C-n" 'ac-next)
 (define-key ac-menu-map "\C-p" 'ac-previous)
 
-(add-to-list 'ac-modes 'ruby-mode)
+(add-to-list 'ac-modes 'enh-ruby-mode)
 (add-to-list 'ac-modes 'js2-mode)
 (add-to-list 'ac-modes 'css-mode)
 
@@ -60,29 +60,14 @@
 (autopair-global-mode +1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; smartparens (https://github.com/Fuco1/smartparens)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (require 'smartparens-config)
-;; (require 'smartparens-ruby)
-;; (smartparens-global-mode)
-;; (show-smartparens-global-mode t)
-;; (sp-with-modes '(rhtml-mode)
-;;   (sp-local-pair "<" ">")
-;;   (sp-local-pair "<%" "%>"))
-;; (setq sp-autoescape-string-quote nil)
-;; (setq sp-autoescape-string-quote-if-empty nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; magit (https://github.com/magit/magit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (if (string-equal system-type "darwin")
     (setq magit-emacsclient-executable "/usr/local/bin/emacsclient"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; enh-ruby-mode (https://github.com/zenspider/enhanced-ruby-mode)
+;; ruby-mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
-
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
@@ -95,7 +80,21 @@
 (add-hook 'ruby-mode-hook 'ruby-tools-mode)
 
 (setq ruby-deep-indent-paren nil)
-;; (setq enh-ruby-deep-indent-paren nil)
+
+(defadvice ruby-indent-line (after unindent-closing-paren activate)
+  (let ((column (current-column))
+        indent offset)
+    (save-excursion
+      (back-to-indentation)
+      (let ((state (syntax-ppss)))
+        (setq offset (- column (current-column)))
+        (when (and (eq (char-after) ?\))
+                   (not (zerop (car state))))
+          (goto-char (cadr state))
+          (setq indent (current-indentation)))))
+    (when indent
+      (indent-line-to indent)
+      (when (> offset 0) (forward-char offset)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ido Settings (Command Completion)
@@ -192,3 +191,8 @@
 (global-set-key (kbd "C-x \\") 'align-regexp)
 (global-set-key (kbd "C-S-O") 'smart-open-line-above)
 (global-set-key (kbd "C-o") 'smart-open-line)
+
+;; (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+;; (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+;; (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)

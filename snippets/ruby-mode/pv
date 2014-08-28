@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: puts inspection
+# key: pv
+# binding: direct-keybinding
+# --
+puts %Q| ===> $1: #{$1.inspect} |
