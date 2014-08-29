@@ -186,9 +186,9 @@
 (setq query-replace-highlight     t) ;; Highlight query object
 (setq mouse-sel-retain-highlight  t) ;; Keep mouse highlighting
 
-(custom-set-faces
- '(default ((t (:family "Hermit" :slant normal :weight light :height 110))))
- '(variable-pitch ((t (:family "Hermit" :slant normal :weight light :height 110)))))
+;; (custom-set-faces
+;;  '(default ((t (:family "Hermit" :slant normal :weight light :height 110))))
+;;  '(variable-pitch ((t (:family "Hermit" :slant normal :weight light :height 110)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Key Bindings
@@ -201,8 +201,3 @@
 (global-set-key (kbd "C-x \\") 'align-regexp)
 (global-set-key (kbd "C-S-O") 'smart-open-line-above)
 (global-set-key (kbd "C-o") 'smart-open-line)
-
-;; (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-;; (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-;; (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
