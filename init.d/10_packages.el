@@ -41,6 +41,7 @@
 
     ;; Auto-completion
     auto-complete
+    go-autocomplete
 
     ;; Themes
     flatui-theme

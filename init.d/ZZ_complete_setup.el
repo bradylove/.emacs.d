@@ -33,6 +33,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq exec-path (append exec-path '("/home/brady/gocode/bin" "/Users/brady/gocode/bin" "/usr/local/Cellar/go/1.3/bin/")))
 (require 'auto-complete-config)
 (ac-config-default)
 
@@ -47,6 +48,11 @@
 (add-to-list 'ac-modes 'css-mode)
 
 (global-auto-complete-mode +1)
+
+;; Add Go source to auto-complete
+(add-hook 'go-mode-hook
+		  (lambda ()
+			(add-to-list 'ac-source ac-go-candidates)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; projectile (https://github.com/bbatsov/projectile)
@@ -66,7 +72,7 @@
 ;; magit (https://github.com/magit/magit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (if (string-equal system-type "darwin")
-    (setq magit-emacsclient-executable "/usr/local/bin/emacsclient"))
+	(setq magit-emacsclient-executable "/usr/local/bin/emacsclient"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smart-mode-line (magit (https://github.com/magit/magit)
@@ -93,30 +99,30 @@
 
 (defadvice ruby-indent-line (after unindent-closing-paren activate)
   (let ((column (current-column))
-        indent offset)
-    (save-excursion
-      (back-to-indentation)
-      (let ((state (syntax-ppss)))
-        (setq offset (- column (current-column)))
-        (when (and (eq (char-after) ?\))
-                   (not (zerop (car state))))
-          (goto-char (cadr state))
-          (setq indent (current-indentation)))))
-    (when indent
-      (indent-line-to indent)
-      (when (> offset 0) (forward-char offset)))))
+		indent offset)
+	(save-excursion
+	  (back-to-indentation)
+	  (let ((state (syntax-ppss)))
+		(setq offset (- column (current-column)))
+		(when (and (eq (char-after) ?\))
+				   (not (zerop (car state))))
+		  (goto-char (cadr state))
+		  (setq indent (current-indentation)))))
+	(when indent
+	  (indent-line-to indent)
+	  (when (> offset 0) (forward-char offset)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ido Settings (Command Completion)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq ido-enable-prefix nil
-      ido-enable-flex-matching t
-      ido-create-new-buffer 'always
-      ido-use-filename-at-point 'guess
-      ido-max-prospects 10
-      ido-save-directory-list-file (expand-file-name "ido.hist" bkl-emacs-config-dir)
-      ido-default-file-method 'selected-window
-      ido-auto-merge-work-directories-length -1)
+	  ido-enable-flex-matching t
+	  ido-create-new-buffer 'always
+	  ido-use-filename-at-point 'guess
+	  ido-max-prospects 10
+	  ido-save-directory-list-file (expand-file-name "ido.hist" bkl-emacs-config-dir)
+	  ido-default-file-method 'selected-window
+	  ido-auto-merge-work-directories-length -1)
 (ido-mode +1)
 (ido-ubiquitous-mode +1)
 
@@ -136,8 +142,8 @@
 (yas-global-mode 1)
 
 (setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"                 ;; personal snippets
-        ))
+	  '("~/.emacs.d/snippets"                 ;; personal snippets
+		))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Whitespace Settings
@@ -149,6 +155,31 @@
 (add-hook 'before-save-hook (lambda () (whitespace-cleanup)))
 (setq next-line-add-newlines 'nil) ; Add newline when at buffer end
 (setq require-final-newline 't) ; Always newline at end of file
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Go mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun set-tab-width-4 ()
+  "Set tab width to 4"
+  (custom-set-variables '(default-tab-width 4)))
+
+(add-hook 'go-mode-hook 'set-tab-width-4)
+
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Org-Mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Add more todo keywords to ORG mode
+(setq org-todo-keywords
+	  '((sequence "TODO(t)" "|" "DONE(d)")
+		(sequence "FEATURE(f)" "|" "COMPLETED(c)")
+		(sequence "BUG(b)" "|" "FIXED(x)")
+		(sequence "|" "CANCELED(a)")))
+
+;; Timestamp items when completed
+(setq org-log-done 'time)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Misc Settings
@@ -177,10 +208,10 @@
 
 ;; Autosave and backup
 (setq make-backup-files nil
-      auto-save-list-file-name nil
-      auto-save-default nil
-      backup-directory-alist `(("." . "~/.emacs.d/backups"))
-      backup-by-copying t)
+	  auto-save-list-file-name nil
+	  auto-save-default nil
+	  backup-directory-alist `(("." . "~/.emacs.d/backups"))
+	  backup-by-copying t)
 
 (setq search-highlight            t) ;; Highlight search object
 (setq query-replace-highlight     t) ;; Highlight query object
