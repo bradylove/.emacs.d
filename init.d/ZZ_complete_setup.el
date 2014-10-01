@@ -33,7 +33,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq exec-path (append exec-path '("/home/brady/gocode/bin" "/Users/brady/gocode/bin" "/usr/local/Cellar/go/1.3/bin/")))
+(setq exec-path
+      (append exec-path
+              '("/home/brady/gocode/bin" "/Users/brady/gocode/bin" "/usr/local/Cellar/go/1.3/bin/" "/usr/local/bin/")))
 (require 'auto-complete-config)
 (ac-config-default)
 
@@ -51,8 +53,8 @@
 
 ;; Add Go source to auto-complete
 (add-hook 'go-mode-hook
-		  (lambda ()
-			(add-to-list 'ac-source ac-go-candidates)))
+                  (lambda ()
+                        (add-to-list 'ac-source ac-go-candidates)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; projectile (https://github.com/bbatsov/projectile)
@@ -72,7 +74,7 @@
 ;; magit (https://github.com/magit/magit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (if (string-equal system-type "darwin")
-	(setq magit-emacsclient-executable "/usr/local/bin/emacsclient"))
+        (setq magit-emacsclient-executable "/usr/local/bin/emacsclient"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smart-mode-line (magit (https://github.com/magit/magit)
@@ -99,30 +101,30 @@
 
 (defadvice ruby-indent-line (after unindent-closing-paren activate)
   (let ((column (current-column))
-		indent offset)
-	(save-excursion
-	  (back-to-indentation)
-	  (let ((state (syntax-ppss)))
-		(setq offset (- column (current-column)))
-		(when (and (eq (char-after) ?\))
-				   (not (zerop (car state))))
-		  (goto-char (cadr state))
-		  (setq indent (current-indentation)))))
-	(when indent
-	  (indent-line-to indent)
-	  (when (> offset 0) (forward-char offset)))))
+                indent offset)
+        (save-excursion
+          (back-to-indentation)
+          (let ((state (syntax-ppss)))
+                (setq offset (- column (current-column)))
+                (when (and (eq (char-after) ?\))
+                                   (not (zerop (car state))))
+                  (goto-char (cadr state))
+                  (setq indent (current-indentation)))))
+        (when indent
+          (indent-line-to indent)
+          (when (> offset 0) (forward-char offset)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ido Settings (Command Completion)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq ido-enable-prefix nil
-	  ido-enable-flex-matching t
-	  ido-create-new-buffer 'always
-	  ido-use-filename-at-point 'guess
-	  ido-max-prospects 10
-	  ido-save-directory-list-file (expand-file-name "ido.hist" bkl-emacs-config-dir)
-	  ido-default-file-method 'selected-window
-	  ido-auto-merge-work-directories-length -1)
+          ido-enable-flex-matching t
+          ido-create-new-buffer 'always
+          ido-use-filename-at-point 'guess
+          ido-max-prospects 10
+          ido-save-directory-list-file (expand-file-name "ido.hist" bkl-emacs-config-dir)
+          ido-default-file-method 'selected-window
+          ido-auto-merge-work-directories-length -1)
 (ido-mode +1)
 (ido-ubiquitous-mode +1)
 
@@ -142,8 +144,8 @@
 (yas-global-mode 1)
 
 (setq yas-snippet-dirs
-	  '("~/.emacs.d/snippets"                 ;; personal snippets
-		))
+          '("~/.emacs.d/snippets"                 ;; personal snippets
+                ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Whitespace Settings
@@ -173,10 +175,10 @@
 
 ;; Add more todo keywords to ORG mode
 (setq org-todo-keywords
-	  '((sequence "TODO(t)" "|" "DONE(d)")
-		(sequence "FEATURE(f)" "|" "COMPLETED(c)")
-		(sequence "BUG(b)" "|" "FIXED(x)")
-		(sequence "|" "CANCELED(a)")))
+          '((sequence "TODO(t)" "|" "DONE(d)")
+                (sequence "FEATURE(f)" "|" "COMPLETED(c)")
+                (sequence "BUG(b)" "|" "FIXED(x)")
+                (sequence "|" "CANCELED(a)")))
 
 ;; Timestamp items when completed
 (setq org-log-done 'time)
@@ -185,8 +187,6 @@
 ;; Misc Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (fset 'yes-or-no-p 'y-or-n-p)
-(global-linum-mode t)
-(setq linum-format "%4d")
 
 (custom-set-variables
  '(column-number-mode t)
@@ -208,10 +208,10 @@
 
 ;; Autosave and backup
 (setq make-backup-files nil
-	  auto-save-list-file-name nil
-	  auto-save-default nil
-	  backup-directory-alist `(("." . "~/.emacs.d/backups"))
-	  backup-by-copying t)
+          auto-save-list-file-name nil
+          auto-save-default nil
+          backup-directory-alist `(("." . "~/.emacs.d/backups"))
+          backup-by-copying t)
 
 (setq search-highlight            t) ;; Highlight search object
 (setq query-replace-highlight     t) ;; Highlight query object
@@ -220,6 +220,12 @@
 ;; (custom-set-faces
 ;;  '(default ((t (:family "Hermit" :slant normal :weight light :height 110))))
 ;;  '(variable-pitch ((t (:family "Hermit" :slant normal :weight light :height 110)))))
+
+
+;; Opposite of 'other-window
+(defun back-window ()
+  (interactive)
+  (other-window -1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Key Bindings
@@ -232,3 +238,5 @@
 (global-set-key (kbd "C-x \\") 'align-regexp)
 (global-set-key (kbd "C-S-O") 'smart-open-line-above)
 (global-set-key (kbd "C-o") 'smart-open-line)
+
+(define-key global-map (kbd "C-x O") 'back-window)
