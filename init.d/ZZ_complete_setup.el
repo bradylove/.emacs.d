@@ -36,6 +36,7 @@
 (setq exec-path
       (append exec-path
               '("/home/brady/gocode/bin" "/Users/brady/gocode/bin" "/usr/local/Cellar/go/1.3/bin/" "/usr/local/bin/")))
+(require 'go-autocomplete)
 (require 'auto-complete-config)
 (ac-config-default)
 

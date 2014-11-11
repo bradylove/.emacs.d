@@ -44,7 +44,8 @@
     go-autocomplete
 
     ;; Themes
-    flatui-theme
+    ;; flatui-theme
+    ample-theme
 
     ;; Language specific packages
     feature-mode
