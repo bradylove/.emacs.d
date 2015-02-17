@@ -1,4 +1,4 @@
-(defun kill-other-buffers ()
+(defun kill-all-other-buffers ()
       "Kill all other buffers."
       (interactive)
       (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))

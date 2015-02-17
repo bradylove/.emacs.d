@@ -35,6 +35,12 @@
     ido-ubiquitous
     autopair
     smart-mode-line
+    restclient
+
+    ;; Helm
+    helm
+    helm-projectile
+    helm-ag
 
     ;; Snippets
     yasnippet
@@ -44,8 +50,11 @@
     go-autocomplete
 
     ;; Themes
-    ;; flatui-theme
-    ample-theme
+    flatui-theme
+    ;; ample-theme
+    ;; darcula-theme
+    ;; tangotango-theme
+    ;; flatland-theme
 
     ;; Language specific packages
     feature-mode

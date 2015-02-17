@@ -3,6 +3,7 @@ auto-save-list/
 elpa/
 ido.hist
 projectile-bookmarks.eld
+projectile.cache
 \#*.*\#
 *.el~
 session.*

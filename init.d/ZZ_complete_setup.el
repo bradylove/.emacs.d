@@ -1,4 +1,3 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; anzu (https://github.com/syohex/emacs-anzu)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (global-anzu-mode +1)
@@ -58,10 +57,16 @@
                         (add-to-list 'ac-source ac-go-candidates)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; helm ()
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'helm-config)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; projectile (https://github.com/bbatsov/projectile)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (projectile-global-mode)
-(setq projectile-completion-system 'grizzl)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
 
 (global-set-key (kbd "s-p") 'projectile-find-file)
 (global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
@@ -100,20 +105,20 @@
 
 (setq ruby-deep-indent-paren nil)
 
-(defadvice ruby-indent-line (after unindent-closing-paren activate)
-  (let ((column (current-column))
-                indent offset)
-        (save-excursion
-          (back-to-indentation)
-          (let ((state (syntax-ppss)))
-                (setq offset (- column (current-column)))
-                (when (and (eq (char-after) ?\))
-                                   (not (zerop (car state))))
-                  (goto-char (cadr state))
-                  (setq indent (current-indentation)))))
-        (when indent
-          (indent-line-to indent)
-          (when (> offset 0) (forward-char offset)))))
+;; (defadvice ruby-indent-line (after unindent-closing-paren activate)
+;;   (let ((column (current-column))
+;;                 indent offset)
+;;         (save-excursion
+;;           (back-to-indentation)
+;;           (let ((state (syntax-ppss)))
+;;                 (setq offset (- column (current-column)))
+;;                 (when (and (eq (char-after) ?\))
+;;                                    (not (zerop (car state))))
+;;                   (goto-char (cadr state))
+;;                   (setq indent (current-indentation)))))
+;;         (when indent
+;;           (indent-line-to indent)
+;;           (when (> offset 0) (forward-char offset)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ido Settings (Command Completion)
