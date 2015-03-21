@@ -36,6 +36,7 @@
     autopair
     smart-mode-line
     restclient
+    nlinum
 
     ;; Helm
     helm
@@ -46,11 +47,14 @@
     yasnippet
 
     ;; Auto-completion
-    auto-complete
-    go-autocomplete
+    ;; auto-complete
+    ;; go-autocomplete
+    company
+
 
     ;; Themes
-    flatui-theme
+    smyx-theme
+    ; flatui-theme
     ;; ample-theme
     ;; darcula-theme
     ;; tangotango-theme

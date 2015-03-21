@@ -12,7 +12,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (diminish 'anzu-mode)
 (diminish 'projectile-mode)
-(diminish 'auto-complete-mode)
+;; (diminish 'auto-complete-mode)
 (diminish 'autopair-mode)
 (diminish 'yas-minor-mode)
 (diminish 'ruby-end-mode)
@@ -32,32 +32,47 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq exec-path
-      (append exec-path
-              '("/home/brady/gocode/bin" "/Users/brady/gocode/bin" "/usr/local/Cellar/go/1.3/bin/" "/usr/local/bin/")))
-(require 'go-autocomplete)
-(require 'auto-complete-config)
-(ac-config-default)
+;; (setq exec-path
+;;       (append exec-path
+;;               '("/home/brady/gocode/bin" "/Users/brady/gocode/bin" "/usr/local/Cellar/go/1.3/bin/" "/usr/local/bin/")))
+;; (require 'go-autocomplete)
+;; (require 'auto-complete-config)
+;; (ac-config-default)
 
-(setq ac-auto-start t)
-(setq ac-auto-show-menu 0.0)
-(ac-set-trigger-key "TAB")
-(define-key ac-menu-map "\C-n" 'ac-next)
-(define-key ac-menu-map "\C-p" 'ac-previous)
+;; (setq ac-auto-start t)
+;; (setq ac-auto-show-menu 0.0)
+;; (ac-set-trigger-key "TAB")
+;; (define-key ac-menu-map "\C-n" 'ac-next)
+;; (define-key ac-menu-map "\C-p" 'ac-previous)
 
-(add-to-list 'ac-modes 'enh-ruby-mode)
-(add-to-list 'ac-modes 'js2-mode)
-(add-to-list 'ac-modes 'css-mode)
+;; (add-to-list 'ac-modes 'enh-ruby-mode)
+;; (add-to-list 'ac-modes 'js2-mode)
+;; (add-to-list 'ac-modes 'css-mode)
 
-(global-auto-complete-mode +1)
+;; (global-auto-complete-mode +1)
 
-;; Add Go source to auto-complete
-(add-hook 'go-mode-hook
-                  (lambda ()
-                        (add-to-list 'ac-source ac-go-candidates)))
+;; ;; Add Go source to auto-complete
+;; (add-hook 'go-mode-hook
+;;                   (lambda ()
+;;                         (add-to-list 'ac-source ac-go-candidates)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; helm ()
+;; nlinum-mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-nlinum-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; company-mode (http://company-mode.github.io/)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq company-idle-delay 0)
+(add-hook 'after-init-hook 'global-company-mode)
+
+;; (add-hook 'ruby-mode
+;;           (lambda ()
+;;             (set (make-local-variable 'company-backends) '(company-ruby))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; helm (https://github.com/emacs-helm/helm)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'helm-config)
 
