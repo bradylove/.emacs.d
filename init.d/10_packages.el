@@ -37,6 +37,8 @@
     smart-mode-line
     restclient
     nlinum
+    popwin
+    guide-key
 
     ;; Helm
     helm
