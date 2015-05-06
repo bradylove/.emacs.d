@@ -54,13 +54,6 @@
 ;;             (set (make-local-variable 'company-backends) '(company-ruby))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; helm (https://github.com/emacs-helm/helm)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'helm-config)
-
-(global-set-key (kbd "M-x") 'helm-M-x)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; projectile (https://github.com/bbatsov/projectile)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (projectile-global-mode)
@@ -71,6 +64,39 @@
 (global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; helm (https://github.com/emacs-helm/helm)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'helm-config)
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+(when (executable-find "curl")
+  (setq helm-google-suggest-use-curl-p t))
+
+(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+      helm-ff-file-name-history-use-recentf t
+      helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t
+      helm-apropos-fuzzy-match t)
+
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+
+(helm-mode 1)
+
+(diminish 'helm-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; autopair
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (autopair-global-mode +1)
@@ -79,7 +105,9 @@
 ;; magit (https://github.com/magit/magit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (if (string-equal system-type "darwin")
-        (setq magit-emacsclient-executable "/usr/local/bin/emacsclient"))
+    (setq magit-emacsclient-executable "/usr/local/bin/emacsclient"))
+
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; smart-mode-line (magit (https://github.com/magit/magit)
@@ -120,37 +148,11 @@
 ;;           (when (> offset 0) (forward-char offset)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Ido Settings (Command Completion)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq ido-enable-prefix nil
-          ido-enable-flex-matching t
-          ido-create-new-buffer 'always
-          ido-use-filename-at-point 'guess
-          ido-max-prospects 10
-          ido-save-directory-list-file (expand-file-name "ido.hist" bkl-emacs-config-dir)
-          ido-default-file-method 'selected-window
-          ido-auto-merge-work-directories-length -1)
-(ido-mode +1)
-(ido-ubiquitous-mode +1)
-
-;;; smarter fuzzy matching for ido
-(flx-ido-mode +1)
-;; disable ido faces to see flx highlights
-(setq ido-use-faces nil)
-
-(setq smex-save-file (expand-file-name ".smex-items" bkl-emacs-config-dir))
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; YASnippet (https://github.com/capitaomorte/yasnippet)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (yas-global-mode 1)
 
-(setq yas-snippet-dirs
-          '("~/.emacs.d/snippets"                 ;; personal snippets
-                ))
+(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Whitespace Settings
