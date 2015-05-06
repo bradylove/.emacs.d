@@ -1,3 +1,4 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; anzu (https://github.com/syohex/emacs-anzu)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (global-anzu-mode +1)
@@ -19,10 +20,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (diminish 'anzu-mode)
 (diminish 'projectile-mode)
-;; (diminish 'auto-complete-mode)
+(diminish 'company-mode)
 (diminish 'autopair-mode)
 (diminish 'yas-minor-mode)
 (diminish 'ruby-end-mode)
+(diminish 'guide-key-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; volatile-highlights (http://www.emacswiki.org/emacs/VolatileHighlights)
@@ -35,33 +37,6 @@
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (setq-default js2-basic-offset 2)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; auto-complete
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (setq exec-path
-;;       (append exec-path
-;;               '("/home/brady/gocode/bin" "/Users/brady/gocode/bin" "/usr/local/Cellar/go/1.3/bin/" "/usr/local/bin/")))
-;; (require 'go-autocomplete)
-;; (require 'auto-complete-config)
-;; (ac-config-default)
-
-;; (setq ac-auto-start t)
-;; (setq ac-auto-show-menu 0.0)
-;; (ac-set-trigger-key "TAB")
-;; (define-key ac-menu-map "\C-n" 'ac-next)
-;; (define-key ac-menu-map "\C-p" 'ac-previous)
-
-;; (add-to-list 'ac-modes 'enh-ruby-mode)
-;; (add-to-list 'ac-modes 'js2-mode)
-;; (add-to-list 'ac-modes 'css-mode)
-
-;; (global-auto-complete-mode +1)
-
-;; ;; Add Go source to auto-complete
-;; (add-hook 'go-mode-hook
-;;                   (lambda ()
-;;                         (add-to-list 'ac-source ac-go-candidates)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; nlinum-mode
