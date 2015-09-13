@@ -3,4 +3,4 @@
 # key: bp
 # binding: direct-keybinding
 # --
-binding.pry
+require 'pry'; binding.pry

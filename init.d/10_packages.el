@@ -36,9 +36,12 @@
     autopair
     smart-mode-line
     restclient
-    nlinum
+    ;; nlinum
+    ;; relative-line-numbers
+    linum-relative
     popwin
     guide-key
+    exec-path-from-shell
 
     ;; Helm
     helm
@@ -52,15 +55,16 @@
     ;; auto-complete
     ;; go-autocomplete
     company
-
+    company-go
 
     ;; Themes
-    smyx-theme
-    ; flatui-theme
+    ;; smyx-theme
+    ;; flatui-theme
     ;; ample-theme
     ;; darcula-theme
     ;; tangotango-theme
     ;; flatland-theme
+    material-theme
 
     ;; Language specific packages
     feature-mode

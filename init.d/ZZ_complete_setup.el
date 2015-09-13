@@ -41,13 +41,31 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; nlinum-mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-nlinum-mode)
+;; (global-nlinum-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; linum-relative
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-linum-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; company-mode (http://company-mode.github.io/)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq company-idle-delay 0)
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "GOPATH"))
+
 (add-hook 'after-init-hook 'global-company-mode)
+
+(setq company-tooltip-limit 10)                      ; bigger popup window
+(setq company-idle-delay .2)                         ; decrease delay before autocompletion popup shows
+(setq company-echo-delay 0)                          ; remove annoying blinking
+(setq company-minimum-prefix-length 1)
+(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+
+(add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
 
 ;; (add-hook 'ruby-mode
 ;;           (lambda ()
@@ -215,14 +233,15 @@
 
 ;; Autosave and backup
 (setq make-backup-files nil
-          auto-save-list-file-name nil
-          auto-save-default nil
-          backup-directory-alist `(("." . "~/.emacs.d/backups"))
-          backup-by-copying t)
+      auto-save-list-file-name nil
+      auto-save-default nil
+      backup-directory-alist `(("." . "~/.emacs.d/backups"))
+      backup-by-copying t)
 
 (setq search-highlight            t) ;; Highlight search object
 (setq query-replace-highlight     t) ;; Highlight query object
 (setq mouse-sel-retain-highlight  t) ;; Keep mouse highlighting
+(setq css-indent-offset 2)
 
 ;; (custom-set-faces
 ;;  '(default ((t (:family "Hermit" :slant normal :weight light :height 110))))
@@ -247,3 +266,5 @@
 (global-set-key (kbd "C-o") 'smart-open-line)
 
 (define-key global-map (kbd "C-x O") 'back-window)
+
+(global-set-key (kbd "C-c g") 'magit-status)
